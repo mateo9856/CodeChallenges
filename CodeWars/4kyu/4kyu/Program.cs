@@ -6,7 +6,8 @@ namespace _4kyu
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var mix = new StringsMix();
+            mix.Mix("sgfdg", "fgdww");
         }
     }
 }
