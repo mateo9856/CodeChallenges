@@ -6,8 +6,8 @@ namespace _4kyu
     {
         static void Main(string[] args)
         {
-            var mix = new StringsMix();
-            mix.Mix("sgfdg", "fgdww");
+            var test = JohnAndAnnSignUpForCodewars.GenerateList("ann", 6);
+            Console.WriteLine();
         }
     }
 }
