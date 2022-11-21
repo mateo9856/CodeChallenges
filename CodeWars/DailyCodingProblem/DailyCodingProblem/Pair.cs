@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DailyCodingProblem
-{//TODO: Optimize
+{//TODO: Optimize and think how implement
     public class Pair
     {
         public Func<int,int,int> cons(int a, int b)
         {
-            return (a, b) => a + b;
+            int pair(int a, int b) => a + b;
+
+            return (a, b) => pair(a, b);
         }
 
         public int car(Func<int, int, int> func) 
@@ -23,6 +25,16 @@ namespace DailyCodingProblem
         {
             var val = func.Method.GetParameters()[1];
             return (int)val.DefaultValue;
+        }
+    }
+
+    public class Test
+    {
+        public Pair pair;
+        public Test()
+        {
+            pair = new Pair();
+            pair.car(pair.cons(1, 4));
         }
     }
 }
