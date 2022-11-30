@@ -9,10 +9,60 @@ namespace DailyCodingProblem
     public class AutoCompleteSystem
     {
         static TrieNode root;
+        
         public AutoCompleteSystem()
         {
             root = new TrieNode();
+            InsertBasicData();
         }
+
+        private void InsertBasicData()
+        {
+            Insert("dog");
+            Insert("deer");
+            Insert("deal");
+        }
+
+        public string[] GetByKey(string key)
+        {
+            List<string> list = new List<string>();
+            int index;
+            TrieNode lastNode = root;
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            for (int i = 0; i < key.Length; i++)
+            {
+                index = key[i] - 'a';
+
+                lastNode = lastNode.Children[index];
+
+                if (lastNode.Children == null)
+                {
+                    return list.ToArray();
+                }
+                stringBuilder.Append((char)(index + 'a'));
+            }
+        }
+
+        private void Suggest(TrieNode lastNode, List<string> list, StringBuilder key)
+        {
+            if (lastNode.IsWordEnd) list.Add(key.ToString());
+
+            if (lastNode.Children == null) return;
+
+            for(int i = 0; i < lastNode.Children.Count(); i++)
+            {
+                if (lastNode.Children[i] == null) continue;
+
+                char c = (char)(i + 'a');
+
+                Suggest(lastNode.Children[i], list, key.Append(c));
+
+                key.Length--;
+            }
+        }
+
         public void Insert(string key) 
         {//i = level, key.Length = length
 
@@ -41,7 +91,7 @@ namespace DailyCodingProblem
 
             for (int i = 0; i < key.Length; i++)
             {
-                index = key[i] - 'a';
+                index = key[i] - 'a';//subtract this convert to int and change from ascii values to start from 0 to 26
 
                 if (pCrawl.Children[index] == null)
                     return false;
@@ -67,5 +117,5 @@ namespace DailyCodingProblem
                 Children[i] = null;
         }
     }
-
+    //TODO: Create Dictionary from for example csv and watch autocomplete algo on youtube
 }
