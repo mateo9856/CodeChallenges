@@ -43,6 +43,7 @@ namespace DailyCodingProblem
                 }
                 stringBuilder.Append((char)(index + 'a'));
             }
+            return list.ToArray();
         }
 
         private void Suggest(TrieNode lastNode, List<string> list, StringBuilder key)
